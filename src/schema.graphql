@@ -1,0 +1,18 @@
+type RegisterResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  Register(password: String!): RegisterResponse!
+}
+
+type Admin {
+  id: ID!
+  username: String!
+  password: String!
+}
+
+type Query {
+  admin: Admin
+}

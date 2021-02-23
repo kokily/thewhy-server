@@ -1,0 +1,9 @@
+type Admin {
+  id: ID!
+  username: String!
+  password: String!
+}
+
+type Query {
+  admin: Admin
+}
