@@ -1,0 +1,14 @@
+type UpdateStoryResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  UpdateStory(
+    id: ID!
+    title: String
+    body: String
+    thumbnail: String
+    tags: [String]
+  ): UpdateStoryResponse!
+}

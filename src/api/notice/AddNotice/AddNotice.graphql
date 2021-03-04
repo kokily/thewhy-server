@@ -1,0 +1,11 @@
+type AddNoticeResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  AddNotice(
+    title: String!
+    body: String!
+  ): AddNoticeResponse!
+}

@@ -1,25 +1,190 @@
-export const typeDefs = ["type RegisterResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Mutation {\n  Register(password: String!): RegisterResponse!\n}\n\ntype Admin {\n  id: ID!\n  username: String!\n  password: String!\n}\n\ntype Query {\n  admin: Admin\n}\n"];
+export const typeDefs = ["type LoginResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Mutation {\n  Login(password: String!): LoginResponse!\n  Logout: LogoutResponse!\n  Register(password: String!): RegisterResponse!\n  AddNotice(title: String!, body: String!): AddNoticeResponse!\n  RemoveNotice(id: ID!): RemoveNoticeResponse!\n  UpdateNotice(id: ID!, title: String, body: String): UpdateNoticeResponse!\n  AddStory(title: String!, body: String!, thumbnail: String, tags: [String]): AddStoryResponse!\n  RemoveStory(id: ID!): RemoveStoryResponse!\n  UpdateStory(id: ID!, title: String, body: String, thumbnail: String, tags: [String]): UpdateStoryResponse!\n}\n\ntype LogoutResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Me {\n  adminId: String\n}\n\ntype MeResponse {\n  ok: Boolean!\n  error: String\n  me: Me\n}\n\ntype Query {\n  Me: MeResponse!\n  ListNotice(page: Int): ListNoticeResponse!\n  ReadNotice(id: ID!): ReadNoticeResponse!\n  ListStories(title: String, tag: String, cursor: ID): ListStoriesResponse!\n  ReadStory(id: ID!): ReadStoryResponse!\n}\n\ntype RegisterResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype AddNoticeResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype ListNoticeResponse {\n  ok: Boolean!\n  error: String\n  notice: [Notice]\n  count: Int!\n}\n\ntype ReadNoticeResponse {\n  ok: Boolean!\n  error: String\n  notice: Notice\n}\n\ntype RemoveNoticeResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype UpdateNoticeResponse {\n  ok: Boolean!\n  error: String\n}\n\nscalar Date\n\ntype Admin {\n  id: ID!\n  username: String!\n  password: String!\n  created_at: Date!\n}\n\ntype Notice {\n  id: ID!\n  title: String!\n  body: String!\n  created_at: Date!\n  updated_at: Date\n}\n\ntype Story {\n  id: ID!\n  title: String!\n  body: String!\n  thumbnail: String\n  tags: [String]\n  created_at: Date!\n  updated_at: Date\n}\n\ntype AddStoryResponse {\n  ok: Boolean!\n  error: String\n  story: Story\n}\n\ntype ListStoriesResponse {\n  ok: Boolean!\n  error: String\n  stories: [Story]\n}\n\ntype ReadStoryResponse {\n  ok: Boolean!\n  error: String\n  story: Story\n}\n\ntype RemoveStoryResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype UpdateStoryResponse {\n  ok: Boolean!\n  error: String\n}\n"];
 /* tslint:disable */
 
 export interface Query {
-  admin: Admin | null;
+  Me: MeResponse;
+  ListNotice: ListNoticeResponse;
+  ReadNotice: ReadNoticeResponse;
+  ListStories: ListStoriesResponse;
+  ReadStory: ReadStoryResponse;
 }
 
-export interface Admin {
+export interface ListNoticeQueryArgs {
+  page: number | null;
+}
+
+export interface ReadNoticeQueryArgs {
   id: string;
-  username: string;
-  password: string;
+}
+
+export interface ListStoriesQueryArgs {
+  title: string | null;
+  tag: string | null;
+  cursor: string | null;
+}
+
+export interface ReadStoryQueryArgs {
+  id: string;
+}
+
+export interface MeResponse {
+  ok: boolean;
+  error: string | null;
+  me: Me | null;
+}
+
+export interface Me {
+  adminId: string | null;
+}
+
+export interface ListNoticeResponse {
+  ok: boolean;
+  error: string | null;
+  notice: Array<Notice> | null;
+  count: number;
+}
+
+export interface Notice {
+  id: string;
+  title: string;
+  body: string;
+  created_at: Date;
+  updated_at: Date | null;
+}
+
+export type Date = any;
+
+export interface ReadNoticeResponse {
+  ok: boolean;
+  error: string | null;
+  notice: Notice | null;
+}
+
+export interface ListStoriesResponse {
+  ok: boolean;
+  error: string | null;
+  stories: Array<Story> | null;
+}
+
+export interface Story {
+  id: string;
+  title: string;
+  body: string;
+  thumbnail: string | null;
+  tags: Array<string> | null;
+  created_at: Date;
+  updated_at: Date | null;
+}
+
+export interface ReadStoryResponse {
+  ok: boolean;
+  error: string | null;
+  story: Story | null;
 }
 
 export interface Mutation {
+  Login: LoginResponse;
+  Logout: LogoutResponse;
   Register: RegisterResponse;
+  AddNotice: AddNoticeResponse;
+  RemoveNotice: RemoveNoticeResponse;
+  UpdateNotice: UpdateNoticeResponse;
+  AddStory: AddStoryResponse;
+  RemoveStory: RemoveStoryResponse;
+  UpdateStory: UpdateStoryResponse;
+}
+
+export interface LoginMutationArgs {
+  password: string;
 }
 
 export interface RegisterMutationArgs {
   password: string;
 }
 
+export interface AddNoticeMutationArgs {
+  title: string;
+  body: string;
+}
+
+export interface RemoveNoticeMutationArgs {
+  id: string;
+}
+
+export interface UpdateNoticeMutationArgs {
+  id: string;
+  title: string | null;
+  body: string | null;
+}
+
+export interface AddStoryMutationArgs {
+  title: string;
+  body: string;
+  thumbnail: string | null;
+  tags: Array<string> | null;
+}
+
+export interface RemoveStoryMutationArgs {
+  id: string;
+}
+
+export interface UpdateStoryMutationArgs {
+  id: string;
+  title: string | null;
+  body: string | null;
+  thumbnail: string | null;
+  tags: Array<string> | null;
+}
+
+export interface LoginResponse {
+  ok: boolean;
+  error: string | null;
+}
+
+export interface LogoutResponse {
+  ok: boolean;
+  error: string | null;
+}
+
 export interface RegisterResponse {
   ok: boolean;
   error: string | null;
+}
+
+export interface AddNoticeResponse {
+  ok: boolean;
+  error: string | null;
+}
+
+export interface RemoveNoticeResponse {
+  ok: boolean;
+  error: string | null;
+}
+
+export interface UpdateNoticeResponse {
+  ok: boolean;
+  error: string | null;
+}
+
+export interface AddStoryResponse {
+  ok: boolean;
+  error: string | null;
+  story: Story | null;
+}
+
+export interface RemoveStoryResponse {
+  ok: boolean;
+  error: string | null;
+}
+
+export interface UpdateStoryResponse {
+  ok: boolean;
+  error: string | null;
+}
+
+export interface Admin {
+  id: string;
+  username: string;
+  password: string;
+  created_at: Date;
 }

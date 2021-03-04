@@ -1,0 +1,14 @@
+type AddStoryResponse {
+  ok: Boolean!
+  error: String
+  story: Story
+}
+
+type Mutation {
+  AddStory(
+    title: String!
+    body: String!
+    thumbnail: String
+    tags: [String]
+  ): AddStoryResponse!
+}

@@ -1,0 +1,13 @@
+type ListStoriesResponse {
+  ok: Boolean!
+  error: String
+  stories: [Story]
+}
+
+type Query {
+  ListStories(
+    title: String
+    tag: String
+    cursor: ID
+  ): ListStoriesResponse!
+}

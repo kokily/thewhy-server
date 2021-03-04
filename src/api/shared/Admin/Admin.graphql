@@ -1,9 +1,8 @@
+scalar Date
+
 type Admin {
   id: ID!
   username: String!
   password: String!
-}
-
-type Query {
-  admin: Admin
+  created_at: Date!
 }

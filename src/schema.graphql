@@ -1,18 +1,127 @@
-type RegisterResponse {
+type LoginResponse {
   ok: Boolean!
   error: String
 }
 
 type Mutation {
+  Login(password: String!): LoginResponse!
+  Logout: LogoutResponse!
   Register(password: String!): RegisterResponse!
+  AddNotice(title: String!, body: String!): AddNoticeResponse!
+  RemoveNotice(id: ID!): RemoveNoticeResponse!
+  UpdateNotice(id: ID!, title: String, body: String): UpdateNoticeResponse!
+  AddStory(title: String!, body: String!, thumbnail: String, tags: [String]): AddStoryResponse!
+  RemoveStory(id: ID!): RemoveStoryResponse!
+  UpdateStory(id: ID!, title: String, body: String, thumbnail: String, tags: [String]): UpdateStoryResponse!
 }
+
+type LogoutResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Me {
+  adminId: String
+}
+
+type MeResponse {
+  ok: Boolean!
+  error: String
+  me: Me
+}
+
+type Query {
+  Me: MeResponse!
+  ListNotice(page: Int): ListNoticeResponse!
+  ReadNotice(id: ID!): ReadNoticeResponse!
+  ListStories(title: String, tag: String, cursor: ID): ListStoriesResponse!
+  ReadStory(id: ID!): ReadStoryResponse!
+}
+
+type RegisterResponse {
+  ok: Boolean!
+  error: String
+}
+
+type AddNoticeResponse {
+  ok: Boolean!
+  error: String
+}
+
+type ListNoticeResponse {
+  ok: Boolean!
+  error: String
+  notice: [Notice]
+  count: Int!
+}
+
+type ReadNoticeResponse {
+  ok: Boolean!
+  error: String
+  notice: Notice
+}
+
+type RemoveNoticeResponse {
+  ok: Boolean!
+  error: String
+}
+
+type UpdateNoticeResponse {
+  ok: Boolean!
+  error: String
+}
+
+scalar Date
 
 type Admin {
   id: ID!
   username: String!
   password: String!
+  created_at: Date!
 }
 
-type Query {
-  admin: Admin
+type Notice {
+  id: ID!
+  title: String!
+  body: String!
+  created_at: Date!
+  updated_at: Date
+}
+
+type Story {
+  id: ID!
+  title: String!
+  body: String!
+  thumbnail: String
+  tags: [String]
+  created_at: Date!
+  updated_at: Date
+}
+
+type AddStoryResponse {
+  ok: Boolean!
+  error: String
+  story: Story
+}
+
+type ListStoriesResponse {
+  ok: Boolean!
+  error: String
+  stories: [Story]
+}
+
+type ReadStoryResponse {
+  ok: Boolean!
+  error: String
+  story: Story
+}
+
+type RemoveStoryResponse {
+  ok: Boolean!
+  error: String
+}
+
+type UpdateStoryResponse {
+  ok: Boolean!
+  error: String
 }

@@ -1,0 +1,12 @@
+type ListNoticeResponse {
+  ok: Boolean!
+  error: String
+  notice: [Notice]
+  count: Int!
+}
+
+type Query {
+  ListNotice(
+    page: Int
+  ): ListNoticeResponse!
+}

@@ -1,0 +1,12 @@
+type UpdateNoticeResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  UpdateNotice(
+    id: ID!
+    title: String
+    body: String
+  ): UpdateNoticeResponse!
+}
