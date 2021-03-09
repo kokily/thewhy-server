@@ -40,6 +40,8 @@ const resolvers: Resolvers = {
         const accessToken = createAccessToken(admin);
         const refreshToken = createRefreshToken(admin);
 
+        console.log('accessToken', accessToken);
+
         setTokenCookie(ctx, accessToken, refreshToken);
 
         return {

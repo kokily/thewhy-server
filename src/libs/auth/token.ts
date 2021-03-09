@@ -3,9 +3,9 @@ import jwt from 'jsonwebtoken';
 import Admin from '../../entities/Admin';
 import { isProd } from '../constants';
 
-export function createAccessToken(user: Admin) {
+export function createAccessToken(admin: Admin) {
   const token = {
-    userId: user.id,
+    adminId: admin.id,
   };
 
   return jwt.sign(token, process.env.ACCESS_SECRET!, {
@@ -13,9 +13,9 @@ export function createAccessToken(user: Admin) {
   });
 }
 
-export function createRefreshToken(user: Admin) {
+export function createRefreshToken(admin: Admin) {
   const token = {
-    userId: user.id,
+    adminId: admin.id,
   };
 
   return jwt.sign(token, process.env.REFRESH_SECRET!, {
