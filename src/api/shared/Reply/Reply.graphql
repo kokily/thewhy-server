@@ -1,0 +1,8 @@
+type Reply {
+  id: ID!
+  body: String!
+  questionId: String
+  question: Question
+  created_at: Date!
+  updated_at: Date
+}

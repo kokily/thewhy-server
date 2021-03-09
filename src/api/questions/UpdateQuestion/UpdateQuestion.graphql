@@ -1,0 +1,16 @@
+type UpdateQuestionResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  UpdateQuestion(
+    id: ID!
+    password: String!
+    name: String
+    phone: String
+    email: String
+    title: String
+    body: String
+  ): UpdateQuestionResponse!
+}

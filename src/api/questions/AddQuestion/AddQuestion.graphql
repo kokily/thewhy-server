@@ -1,0 +1,15 @@
+type AddQuestionResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  AddQuestion(
+    name: String!
+    password: String!
+    phone: String
+    email: String
+    title: String!
+    body: String!
+  ): AddQuestionResponse!
+}

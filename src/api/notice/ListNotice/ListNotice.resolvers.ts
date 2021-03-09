@@ -28,14 +28,14 @@ const resolvers: Resolvers = {
           ok: true,
           error: null,
           notice,
-          count: Math.ceil(noticeCount / 10),
+          lastPage: Math.ceil(noticeCount / 10),
         };
       } catch (err) {
         return {
           ok: false,
           error: err.message,
           notice: null,
-          count: 1,
+          lastPage: 1,
         };
       }
     },

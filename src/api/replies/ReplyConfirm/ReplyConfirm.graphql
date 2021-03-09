@@ -1,0 +1,11 @@
+type ReplyConfirmResponse {
+  ok: Boolean!
+  error: String
+  reply: Reply
+}
+
+type Query {
+  ReplyConfirm(
+    id: ID!
+  ): ReplyConfirmResponse!
+}

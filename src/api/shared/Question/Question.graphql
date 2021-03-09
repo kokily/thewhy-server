@@ -1,0 +1,14 @@
+type Question {
+  id: ID!
+  name: String!
+  password: String!
+  phone: String
+  email: String
+  isReply: Boolean!
+  title: String!
+  body: String!
+  replyId: String
+  reply: Reply
+  created_at: Date!
+  updated_at: Date
+}

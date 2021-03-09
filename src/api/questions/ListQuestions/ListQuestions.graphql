@@ -1,0 +1,12 @@
+type ListQuestionsResponse {
+  ok: Boolean!
+  error: String
+  questions: [Question]
+  lastPage: Int!
+}
+
+type Query {
+  ListQuestions(
+    page: Int
+  ): ListQuestionsResponse!
+}

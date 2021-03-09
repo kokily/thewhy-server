@@ -2,7 +2,7 @@ type ListNoticeResponse {
   ok: Boolean!
   error: String
   notice: [Notice]
-  count: Int!
+  lastPage: Int!
 }
 
 type Query {

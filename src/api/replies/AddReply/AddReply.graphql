@@ -1,0 +1,11 @@
+type AddReplyResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  AddReply(
+    body: String!
+    questionId: ID!
+  ): AddReplyResponse!
+}

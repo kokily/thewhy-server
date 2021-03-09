@@ -10,6 +10,11 @@ type Mutation {
   AddNotice(title: String!, body: String!): AddNoticeResponse!
   RemoveNotice(id: ID!): RemoveNoticeResponse!
   UpdateNotice(id: ID!, title: String, body: String): UpdateNoticeResponse!
+  AddQuestion(name: String!, password: String!, phone: String, email: String, title: String!, body: String!): AddQuestionResponse!
+  RemoveQuestion(id: ID!): RemoveQuestionResponse!
+  UpdateQuestion(id: ID!, password: String!, name: String, phone: String, email: String, title: String, body: String): UpdateQuestionResponse!
+  AddReply(body: String!, questionId: ID!): AddReplyResponse!
+  RemoveReply(id: ID!): RemoveReplyResponse!
   AddStory(title: String!, body: String!, thumbnail: String, tags: [String]): AddStoryResponse!
   RemoveStory(id: ID!): RemoveStoryResponse!
   UpdateStory(id: ID!, title: String, body: String, thumbnail: String, tags: [String]): UpdateStoryResponse!
@@ -34,6 +39,11 @@ type Query {
   Me: MeResponse!
   ListNotice(page: Int): ListNoticeResponse!
   ReadNotice(id: ID!): ReadNoticeResponse!
+  ListQuestions(page: Int): ListQuestionsResponse!
+  QuestionConfirm(id: ID!): QuestionConfirmResponse!
+  ReadQuestion(id: ID!, password: String!): ReadQuestionResponse!
+  ReadReply(id: ID!, password: String!): ReadReplyResponse!
+  ReplyConfirm(id: ID!): ReplyConfirmResponse!
   ListStories(title: String, tag: String, cursor: ID): ListStoriesResponse!
   ReadStory(id: ID!): ReadStoryResponse!
 }
@@ -52,7 +62,7 @@ type ListNoticeResponse {
   ok: Boolean!
   error: String
   notice: [Notice]
-  count: Int!
+  lastPage: Int!
 }
 
 type ReadNoticeResponse {
@@ -71,6 +81,62 @@ type UpdateNoticeResponse {
   error: String
 }
 
+type AddQuestionResponse {
+  ok: Boolean!
+  error: String
+}
+
+type ListQuestionsResponse {
+  ok: Boolean!
+  error: String
+  questions: [Question]
+  lastPage: Int!
+}
+
+type QuestionConfirmResponse {
+  ok: Boolean!
+  error: String
+  question: Question
+}
+
+type ReadQuestionResponse {
+  ok: Boolean!
+  error: String
+  question: Question
+}
+
+type RemoveQuestionResponse {
+  ok: Boolean!
+  error: String
+}
+
+type UpdateQuestionResponse {
+  ok: Boolean!
+  error: String
+}
+
+type AddReplyResponse {
+  ok: Boolean!
+  error: String
+}
+
+type ReadReplyResponse {
+  ok: Boolean!
+  error: String
+  reply: Reply
+}
+
+type RemoveReplyResponse {
+  ok: Boolean!
+  error: String
+}
+
+type ReplyConfirmResponse {
+  ok: Boolean!
+  error: String
+  reply: Reply
+}
+
 scalar Date
 
 type Admin {
@@ -84,6 +150,30 @@ type Notice {
   id: ID!
   title: String!
   body: String!
+  created_at: Date!
+  updated_at: Date
+}
+
+type Question {
+  id: ID!
+  name: String!
+  password: String!
+  phone: String
+  email: String
+  isReply: Boolean!
+  title: String!
+  body: String!
+  replyId: String
+  reply: Reply
+  created_at: Date!
+  updated_at: Date
+}
+
+type Reply {
+  id: ID!
+  body: String!
+  questionId: String
+  question: Question
   created_at: Date!
   updated_at: Date
 }
