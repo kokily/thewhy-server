@@ -9,7 +9,8 @@ const resolvers: Resolvers = {
     AddNotice: authResolver(
       async (_, args: AddNoticeMutationArgs): Promise<AddNoticeResponse> => {
         try {
-          const notice = await getRepository(Notice).create({ ...args });
+          const count = await getRepository(Notice).count();
+          const notice = await getRepository(Notice).create({ ...args, num: count + 1 });
 
           await notice.save();
 

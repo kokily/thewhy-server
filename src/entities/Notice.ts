@@ -12,6 +12,9 @@ class Notice extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
+  @Column({ type: 'int' })
+  num!: number;
+
   @Column({ type: 'text' })
   title!: string;
 

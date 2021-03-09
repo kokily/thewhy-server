@@ -1,5 +1,6 @@
 type Notice {
   id: ID!
+  num: Int!
   title: String!
   body: String!
   created_at: Date!
