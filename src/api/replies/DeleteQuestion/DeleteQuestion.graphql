@@ -1,0 +1,10 @@
+type DeleteQuestionResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  DeleteQuestion(
+    id: ID!
+  ): DeleteQuestionResponse!
+}
