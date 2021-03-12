@@ -11,7 +11,7 @@ type Mutation {
   RemoveNotice(id: ID!): RemoveNoticeResponse!
   UpdateNotice(id: ID!, title: String, body: String): UpdateNoticeResponse!
   AddQuestion(name: String!, password: String!, phone: String, email: String, title: String!, body: String!): AddQuestionResponse!
-  UpdateQuestions(id: ID!, password: String!, name: String, phone: String, email: String, title: String, body: String): UpdateQuestionsResponse!
+  UpdateQuestion(id: ID!, password: String!, name: String, phone: String, email: String, title: String, body: String): UpdateQuestionResponse!
   AddReply(body: String!, questionId: ID!): AddReplyResponse!
   RemoveReply(id: ID!): RemoveReplyResponse!
   AddStory(title: String!, body: String!, thumbnail: String, tags: [String]): AddStoryResponse!
@@ -90,7 +90,7 @@ type ListQuestionsResponse {
   lastPage: Int!
 }
 
-type UpdateQuestionsResponse {
+type UpdateQuestionResponse {
   ok: Boolean!
   error: String
 }

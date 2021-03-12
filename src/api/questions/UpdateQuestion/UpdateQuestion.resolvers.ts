@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 import {
-  UpdateQuestionsMutationArgs,
-  UpdateQuestionsResponse,
+  UpdateQuestionMutationArgs,
+  UpdateQuestionResponse,
 } from '../../../types/graphql';
 import { Resolvers } from '../../../types/resolvers';
 import { cleanNullArgs } from '../../../libs/utils';
@@ -11,8 +11,8 @@ const resolvers: Resolvers = {
   Mutation: {
     UpdateQuestions: async (
       _,
-      args: UpdateQuestionsMutationArgs
-    ): Promise<UpdateQuestionsResponse> => {
+      args: UpdateQuestionMutationArgs
+    ): Promise<UpdateQuestionResponse> => {
       const { id, password } = args;
       const notNull = cleanNullArgs(args);
 
