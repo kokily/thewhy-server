@@ -15,6 +15,7 @@ type Mutation {
   UpdateQuestion(id: ID!, password: String!, name: String, phone: String, email: String, title: String, body: String): UpdateQuestionResponse!
   AddReply(body: String!, questionId: ID!): AddReplyResponse!
   RemoveReply(id: ID!): RemoveReplyResponse!
+  UpdateReply(id: ID!, body: String): UpdateReplyResponse!
   AddStory(title: String!, body: String!, thumbnail: String, tags: [String]): AddStoryResponse!
   RemoveStory(id: ID!): RemoveStoryResponse!
   UpdateStory(id: ID!, title: String, body: String, thumbnail: String, tags: [String]): UpdateStoryResponse!
@@ -40,8 +41,6 @@ type Query {
   ListNotice(page: Int): ListNoticeResponse!
   ReadNotice(id: ID!): ReadNoticeResponse!
   ListQuestions(page: Int): ListQuestionsResponse!
-  ReadReply(id: ID!, password: String!): ReadReplyResponse!
-  ReplyConfirm(id: ID!): ReplyConfirmResponse!
   ListStories(title: String, tag: String, cursor: ID): ListStoriesResponse!
   ReadStory(id: ID!): ReadStoryResponse!
 }
@@ -106,21 +105,14 @@ type AddReplyResponse {
   error: String
 }
 
-type ReadReplyResponse {
-  ok: Boolean!
-  error: String
-  reply: Reply
-}
-
 type RemoveReplyResponse {
   ok: Boolean!
   error: String
 }
 
-type ReplyConfirmResponse {
+type UpdateReplyResponse {
   ok: Boolean!
   error: String
-  reply: Reply
 }
 
 scalar Date
