@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 import {
-  UpdateQuestionMutationArgs,
-  UpdateQuestionResponse,
+  UpdateQuestionsMutationArgs,
+  UpdateQuestionsResponse,
 } from '../../../types/graphql';
 import { Resolvers } from '../../../types/resolvers';
 import { cleanNullArgs } from '../../../libs/utils';
@@ -9,10 +9,10 @@ import Question from '../../../entities/Question';
 
 const resolvers: Resolvers = {
   Mutation: {
-    UpdateQuestion: async (
+    UpdateQuestions: async (
       _,
-      args: UpdateQuestionMutationArgs
-    ): Promise<UpdateQuestionResponse> => {
+      args: UpdateQuestionsMutationArgs
+    ): Promise<UpdateQuestionsResponse> => {
       const { id, password } = args;
       const notNull = cleanNullArgs(args);
 
@@ -22,7 +22,7 @@ const resolvers: Resolvers = {
         if (!question) {
           return {
             ok: false,
-            error: '존재하지 않는 질문입니다.',
+            error: '존재하지 않는 문의 글 입니다.',
           };
         }
 

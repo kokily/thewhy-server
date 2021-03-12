@@ -11,8 +11,7 @@ type Mutation {
   RemoveNotice(id: ID!): RemoveNoticeResponse!
   UpdateNotice(id: ID!, title: String, body: String): UpdateNoticeResponse!
   AddQuestion(name: String!, password: String!, phone: String, email: String, title: String!, body: String!): AddQuestionResponse!
-  RemoveQuestion(id: ID!): RemoveQuestionResponse!
-  UpdateQuestion(id: ID!, password: String!, name: String, phone: String, email: String, title: String, body: String): UpdateQuestionResponse!
+  UpdateQuestions(id: ID!, password: String!, name: String, phone: String, email: String, title: String, body: String): UpdateQuestionsResponse!
   AddReply(body: String!, questionId: ID!): AddReplyResponse!
   RemoveReply(id: ID!): RemoveReplyResponse!
   AddStory(title: String!, body: String!, thumbnail: String, tags: [String]): AddStoryResponse!
@@ -40,8 +39,6 @@ type Query {
   ListNotice(page: Int): ListNoticeResponse!
   ReadNotice(id: ID!): ReadNoticeResponse!
   ListQuestions(page: Int): ListQuestionsResponse!
-  QuestionConfirm(id: ID!): QuestionConfirmResponse!
-  ReadQuestion(id: ID!, password: String!): ReadQuestionResponse!
   ReadReply(id: ID!, password: String!): ReadReplyResponse!
   ReplyConfirm(id: ID!): ReplyConfirmResponse!
   ListStories(title: String, tag: String, cursor: ID): ListStoriesResponse!
@@ -93,24 +90,7 @@ type ListQuestionsResponse {
   lastPage: Int!
 }
 
-type QuestionConfirmResponse {
-  ok: Boolean!
-  error: String
-  question: Question
-}
-
-type ReadQuestionResponse {
-  ok: Boolean!
-  error: String
-  question: Question
-}
-
-type RemoveQuestionResponse {
-  ok: Boolean!
-  error: String
-}
-
-type UpdateQuestionResponse {
+type UpdateQuestionsResponse {
   ok: Boolean!
   error: String
 }
