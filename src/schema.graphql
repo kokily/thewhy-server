@@ -42,6 +42,7 @@ type Query {
   ListNotice(page: Int): ListNoticeResponse!
   ReadNotice(id: ID!): ReadNoticeResponse!
   ListQuestions(page: Int): ListQuestionsResponse!
+  ReadQuestion(id: ID!): ReadQuestionResponse!
   ListStories(title: String, tag: String, cursor: ID): ListStoriesResponse!
   ReadStory(id: ID!): ReadStoryResponse!
 }
@@ -89,6 +90,12 @@ type ListQuestionsResponse {
   error: String
   questions: [Question]
   lastPage: Int!
+}
+
+type ReadQuestionResponse {
+  ok: Boolean!
+  error: String
+  question: Question
 }
 
 type RemoveQuestionResponse {

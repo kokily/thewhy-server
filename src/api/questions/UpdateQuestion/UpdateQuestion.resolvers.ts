@@ -9,7 +9,7 @@ import Question from '../../../entities/Question';
 
 const resolvers: Resolvers = {
   Mutation: {
-    UpdateQuestions: async (
+    UpdateQuestion: async (
       _,
       args: UpdateQuestionMutationArgs
     ): Promise<UpdateQuestionResponse> => {
