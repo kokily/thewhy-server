@@ -15,7 +15,10 @@ const resolvers: Resolvers = {
           const reply = await getRepository(Reply).create({ ...args });
 
           await reply.save();
-          await getRepository(Question).update({ id: questionId }, { isReply: true });
+          await getRepository(Question).update(
+            { id: questionId },
+            { isReply: true, replyId: reply.id }
+          );
 
           return {
             ok: true,
