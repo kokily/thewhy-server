@@ -7,7 +7,7 @@ import app from './app';
 import ConnectionOptions from './libs/ormConfig';
 
 const configurations = {
-  production: { ssl: true, port: 443, hostname: 'thewhy.kr' },
+  production: { ssl: true, port: 443, hostname: 'api.thewhy.kr' },
   development: { ssl: false, port: 4000, hostname: 'localhost' },
 };
 
