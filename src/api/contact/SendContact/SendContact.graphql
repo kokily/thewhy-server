@@ -1,0 +1,13 @@
+type SendContactResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  SendContact(
+    name: String!
+    email: String!
+    subject: String!
+    body: String!
+  ): SendContactResponse!
+}

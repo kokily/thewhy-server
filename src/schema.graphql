@@ -7,6 +7,7 @@ type Mutation {
   Login(password: String!): LoginResponse!
   Logout: LogoutResponse!
   Register(password: String!): RegisterResponse!
+  SendContact(name: String!, email: String!, subject: String!, body: String!): SendContactResponse!
   AddNotice(title: String!, body: String!): AddNoticeResponse!
   RemoveNotice(id: ID!): RemoveNoticeResponse!
   UpdateNotice(id: ID!, title: String, body: String): UpdateNoticeResponse!
@@ -48,6 +49,11 @@ type Query {
 }
 
 type RegisterResponse {
+  ok: Boolean!
+  error: String
+}
+
+type SendContactResponse {
   ok: Boolean!
   error: String
 }
