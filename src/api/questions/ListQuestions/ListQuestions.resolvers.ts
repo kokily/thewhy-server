@@ -9,30 +9,47 @@ const resolvers: Resolvers = {
       _,
       args: ListQuestionsQueryArgs
     ): Promise<ListQuestionsResponse> => {
-      const { page } = args;
-      let ccurrentPage = 1;
+      const { page, title } = args;
+      let currentPage = 1;
 
       try {
         if (page) {
-          ccurrentPage = page;
+          currentPage = page;
         }
 
-        const questions = await getManager()
+        const query = await getManager()
           .createQueryBuilder(Question, 'questions')
           .limit(10)
-          .skip((ccurrentPage - 1) * 10)
+          .skip((currentPage - 1) * 10)
           .orderBy('questions.created_at', 'DESC')
-          .addOrderBy('questions.id', 'DESC')
-          .getMany();
+          .addOrderBy('questions.id', 'DESC');
 
-        const questionsCount = await getRepository(Question).count();
+        if (title) {
+          query.andWhere('questions.title like :title', { title: `%${title}%` });
 
-        return {
-          ok: true,
-          error: null,
-          questions,
-          lastPage: Math.ceil(questionsCount / 10),
-        };
+          const questions = await query.getMany();
+          const questionsCount = await getManager()
+            .createQueryBuilder(Question, 'questions')
+            .where('questions.title like :title', { title: `%${title}%` })
+            .getCount();
+
+          return {
+            ok: true,
+            error: null,
+            questions,
+            lastPage: Math.ceil(questionsCount / 10),
+          };
+        } else {
+          const questions = await query.getMany();
+          const questionsCount = await getRepository(Question).count();
+
+          return {
+            ok: true,
+            error: null,
+            questions,
+            lastPage: Math.ceil(questionsCount / 10),
+          };
+        }
       } catch (err) {
         return {
           ok: false,

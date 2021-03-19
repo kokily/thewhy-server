@@ -8,5 +8,6 @@ type ListQuestionsResponse {
 type Query {
   ListQuestions(
     page: Int
+    title: String
   ): ListQuestionsResponse!
 }

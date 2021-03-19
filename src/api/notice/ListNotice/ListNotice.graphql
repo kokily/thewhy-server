@@ -8,5 +8,6 @@ type ListNoticeResponse {
 type Query {
   ListNotice(
     page: Int
+    title: String
   ): ListNoticeResponse!
 }

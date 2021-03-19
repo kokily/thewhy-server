@@ -40,9 +40,9 @@ type MeResponse {
 
 type Query {
   Me: MeResponse!
-  ListNotice(page: Int): ListNoticeResponse!
+  ListNotice(page: Int, title: String): ListNoticeResponse!
   ReadNotice(id: ID!): ReadNoticeResponse!
-  ListQuestions(page: Int): ListQuestionsResponse!
+  ListQuestions(page: Int, title: String): ListQuestionsResponse!
   ReadQuestion(id: ID!): ReadQuestionResponse!
   ListStories(title: String, tag: String, cursor: ID): ListStoriesResponse!
   ReadStory(id: ID!): ReadStoryResponse!
