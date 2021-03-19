@@ -14,6 +14,7 @@ type Mutation {
   AddQuestion(name: String!, password: String!, phone: String, email: String, title: String!, body: String!): AddQuestionResponse!
   RemoveQuestion(id: ID!, password: String!): RemoveQuestionResponse!
   UpdateQuestion(id: ID!, password: String!, name: String, phone: String, email: String, title: String, body: String): UpdateQuestionResponse!
+  ValidPassword(id: ID!, password: String!): ValidPasswordResponse!
   AddReply(body: String!, questionId: ID!): AddReplyResponse!
   DeleteQuestion(id: ID!): DeleteQuestionResponse!
   RemoveReply(id: ID!): RemoveReplyResponse!
@@ -111,6 +112,11 @@ type RemoveQuestionResponse {
 
 type UpdateQuestionResponse {
   ok: Boolean!
+  error: String
+}
+
+type ValidPasswordResponse {
+  ok: Boolean
   error: String
 }
 
