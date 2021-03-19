@@ -21,11 +21,11 @@ const resolvers: Resolvers = {
             };
           }
 
-          await getRepository(Reply).delete(id);
           await getRepository(Question).update(
             { id: reply.questionId },
-            { isReply: false }
+            { isReply: false, replyId: undefined }
           );
+          await getRepository(Reply).delete(id);
 
           return {
             ok: true,
