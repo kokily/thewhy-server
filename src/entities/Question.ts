@@ -43,7 +43,9 @@ class Question extends BaseEntity {
   @Column({ nullable: true })
   replyId!: string;
 
-  @OneToOne((type) => Reply, (reply) => reply.question)
+  @OneToOne((type) => Reply, (reply) => reply.question, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'replyId' })
   reply!: Reply;
 
