@@ -22,7 +22,9 @@ class Reply extends BaseEntity {
   @Column({ nullable: true })
   questionId!: string;
 
-  @OneToOne((type) => Question, (question) => question.reply)
+  @OneToOne((type) => Question, (question) => question.reply, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'questionId' })
   question!: Question;
 
