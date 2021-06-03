@@ -6,6 +6,6 @@ type RemoveQuestionResponse {
 type Mutation {
   RemoveQuestion(
     id: ID!
-    password: String
+    password: String!
   ): RemoveQuestionResponse!
 }

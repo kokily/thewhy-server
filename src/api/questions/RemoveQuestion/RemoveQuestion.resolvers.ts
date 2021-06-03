@@ -1,4 +1,3 @@
-import { Context } from 'koa';
 import { getRepository } from 'typeorm';
 import {
   RemoveQuestionMutationArgs,
@@ -11,10 +10,8 @@ const resolvers: Resolvers = {
   Mutation: {
     RemoveQuestion: async (
       _,
-      args: RemoveQuestionMutationArgs,
-      { ctx }: { ctx: Context }
+      args: RemoveQuestionMutationArgs
     ): Promise<RemoveQuestionResponse> => {
-      const { adminId } = ctx.state.admin;
       const { id, password } = args;
 
       try {
@@ -27,37 +24,21 @@ const resolvers: Resolvers = {
           };
         }
 
-        if (password) {
-          const valid = await question.validPassword(password);
+        const valid = await question.validPassword(password);
 
-          if (!valid) {
-            return {
-              ok: false,
-              error: '비밀번호가 일치하지 않습니다.',
-            };
-          }
-
-          await getRepository(Question).delete(id);
-
+        if (!valid) {
           return {
-            ok: true,
-            error: null,
+            ok: false,
+            error: '비밀번호가 일치하지 않습니다.',
           };
-        } else {
-          if (adminId === process.env.ADMIN_ID) {
-            await getRepository(Question).delete(id);
-
-            return {
-              ok: true,
-              error: null,
-            };
-          } else {
-            return {
-              ok: false,
-              error: '관리자 아이디로 시도하세요!',
-            };
-          }
         }
+
+        await getRepository(Question).delete(id);
+
+        return {
+          ok: true,
+          error: null,
+        };
       } catch (err) {
         return {
           ok: false,
