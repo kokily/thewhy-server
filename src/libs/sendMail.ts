@@ -23,7 +23,7 @@ async function SendMail({
 
   const options = {
     from: email,
-    to: 'kokily@naver.com',
+    to: 'thewhy@thewhy.kr',
     subject: 'The Y 컴퍼니 홈페이지 문의 메일 알림',
     html: `
       <h2>
